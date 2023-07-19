@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import Movie from "../components/Movie";
 import { getMovies } from "../../api";
-// import { useSearchParams } from "react-router-dom";
 
 function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   // const [error, setError] = useState({});
-  // const [searchParams, setSearchParams] = useSearchParams();
 
   function handleSubmit(e, text) {
     e.preventDefault();
@@ -39,7 +37,6 @@ function Home() {
   useEffect(() => {
     const savedMovies = JSON.parse(sessionStorage.getItem("movies"));
     setMovies(savedMovies);
-    console.log("Movies Loaded");
   }, []);
 
   const movieEl = movies?.map((movie) => {
@@ -57,7 +54,7 @@ function Home() {
     return (
       <>
         <SearchBar handleSubmit={handleSubmit} />
-        <h1 className="text-white text-center pt-[100px]">Loading...</h1>;
+        <h1 className="pt-[100px] text-center text-white">Loading...</h1>;
       </>
     );
   }
@@ -66,7 +63,7 @@ function Home() {
     <>
       <div>
         <SearchBar handleSubmit={handleSubmit} />
-        <div className="gap-5 flex flex-wrap text-white pt-[5em] items-start justify-center text-center">
+        <div className="m-auto flex max-w-[1200px] flex-wrap items-start justify-center gap-5 pt-[5em] text-center text-white">
           {movieEl}
         </div>
       </div>

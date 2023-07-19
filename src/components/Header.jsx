@@ -5,19 +5,28 @@ function Header() {
   const activeStyle = "font-bold border-b-[2px] border-white";
 
   return (
-    <header className="bg-[#F1B63F] flex items-center py-[2em] px-[1.2em]">
-      <PiFilmSlateLight className="text-[2.3rem] ml-3" />
-      <h1 className="text-[2rem]">moviesearch.</h1>
-      <nav className="flex ml-auto gap-3 flex-col items-end min-[500px]:flex-row">
+    <header className="flex items-center justify-between bg-[#F1B63F] px-[1.2em] py-[2.5em]">
+      <div className="relative flex select-none items-center">
+        <PiFilmSlateLight className="ml-3 text-[2.3rem]" />
+        <h1 className="text-[2rem]">moviesearch.</h1>
+        <p className="absolute bottom-[-0.5em] right-0 text-[0.85rem]">
+          by jako
+        </p>
+      </div>
+      <nav className={`flex flex-col items-end gap-3 min-[500px]:flex-row`}>
         <NavLink
           to="/"
-          className={({ isActive }) => (isActive ? activeStyle : "")}
+          className={({ isActive }) =>
+            isActive ? activeStyle : "hover:font-bold"
+          }
         >
           Home
         </NavLink>
         <NavLink
           to="/watchlist"
-          className={({ isActive }) => (isActive ? activeStyle : "")}
+          className={({ isActive }) =>
+            isActive ? activeStyle : "hover:font-bold"
+          }
         >
           Watchlist
         </NavLink>
