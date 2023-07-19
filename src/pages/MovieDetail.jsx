@@ -8,7 +8,7 @@ function MovieDetail() {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   // const [error, setError] = useState({});
-  const { watchlist, setWatchlist, handleAdd, handleRemove } = useWatchlist();
+  const { watchlist, handleAdd, handleRemove } = useWatchlist();
 
   // Check if the movie is already in the watchlist
   const inWatchlist = watchlist.some((el) => {
@@ -76,9 +76,20 @@ function MovieDetail() {
               </button>
             )}
           </div>
-          <p>Directed by: {movie.Director}</p>
-          <p>Written by: {movie.Writer}</p>
-          <p>Plot: {movie.Plot}</p>
+          <div className="flex flex-col gap-2">
+            <p>
+              <span className="font-bold">Directed by: </span>
+              {movie.Director}
+            </p>
+            <p>
+              <span className="font-bold">Written by: </span>
+              {movie.Writer}
+            </p>
+            <p>
+              <span className="font-bold">Plot: </span>
+              {movie.Plot}
+            </p>
+          </div>
         </div>
       </div>
     </>
