@@ -8,20 +8,12 @@ function MovieDetail() {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   // const [error, setError] = useState({});
-  const { watchlist, setWatchlist } = useWatchlist();
+  const { watchlist, setWatchlist, handleAdd, handleRemove } = useWatchlist();
 
   // Check if the movie is already in the watchlist
   const inWatchlist = watchlist.some((el) => {
     return el.imdbID === movie.imdbID;
   });
-
-  function handleClick() {
-    if (!inWatchlist) {
-      setWatchlist((prevWatchlist) => {
-        return [...prevWatchlist, movie];
-      });
-    }
-  }
 
   useEffect(() => {
     async function retrieveMovie(id) {
@@ -39,40 +31,50 @@ function MovieDetail() {
   }, [id]);
 
   useEffect(() => {
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    if (watchlist.length > 0) {
+      localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    }
   }, [watchlist]);
 
   if (loading) {
-    return <h1 className="text-white">Loading...</h1>;
+    return <h1 className="pt-[100px] text-center text-white">Loading...</h1>;
   }
 
   return (
     <>
       <Link
-        className="text-white p-5"
+        className="p-5 text-white"
         to=".."
       >
         ← Back to search
       </Link>
-      <div className="text-white flex flex-col gap-[1.5em] items-center justify-center p-[3em]">
+      <div className="flex flex-col items-center justify-center gap-[1.5em] p-[3em] text-white">
         <img
-          className="border rounded max-w-[200px]]"
+          className="max-w-[200px]] rounded border"
           src={movie.Poster}
           alt="The movie poster"
         />
         <div className="flex flex-col">
-          <div className="flex flex-col items-center justify-center">
+          <div className="mb-[2em] flex flex-col items-center justify-center">
             <h1 className="text-[2rem] font-bold">{movie.Title}</h1>
-            <p className="text-[1.5rem] mb-5">({movie.Year})</p>
-            <button
-              onClick={handleClick}
-              className={`${
-                inWatchlist ? "bg-green-700" : ""
-              } border rounded-[2em] px-[1.5em] py-[0.2em] text-[0.875rem] hover:bg-green-700`}
-            >
-              {inWatchlist ? "In watchlist" : "Add to watchlist"}
-            </button>
-            <button className=""></button>
+            <p className="mb-5 text-[1.5rem]">({movie.Year})</p>
+            {!inWatchlist ? (
+              <button
+                onClick={(e) => handleAdd(e, movie)}
+                className={`${
+                  inWatchlist ? "bg-green-700" : ""
+                } rounded-[2em] border px-[1.5em] py-[0.2em] text-[0.875rem] hover:bg-green-700`}
+              >
+                Add to watchlist
+              </button>
+            ) : (
+              <button
+                onClick={(e) => handleRemove(e, movie)}
+                className="bg-green-700 rounded-[2em] border px-[1.5em] py-[0.2em] text-[0.875rem] group hover:after:content-['Remove'] hover:bg-red-700"
+              >
+                <span className="group-hover:hidden">In Watchlist</span>
+              </button>
+            )}
           </div>
           <p>Directed by: {movie.Director}</p>
           <p>Written by: {movie.Writer}</p>
