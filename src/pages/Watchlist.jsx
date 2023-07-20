@@ -6,7 +6,7 @@ function Watchlist() {
   const watchlistEl = watchlist.map((movie) => {
     return (
       <div
-        className="flex w-[150px] flex-col items-center"
+        className="flex w-[200px] flex-col items-center"
         key={movie.imdbID}
       >
         <img

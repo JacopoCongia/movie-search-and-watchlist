@@ -1,5 +1,5 @@
 import { PiFilmSlateLight } from "react-icons/pi";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Header() {
   const activeStyle = "font-bold border-b-[2px] border-white";
@@ -8,7 +8,12 @@ function Header() {
     <header className="flex items-center justify-between bg-[#F1B63F] px-[1.2em] py-[2.5em]">
       <div className="relative flex select-none items-center">
         <PiFilmSlateLight className="ml-3 text-[2.3rem]" />
-        <h1 className="text-[2rem]">moviesearch.</h1>
+        <Link
+          to="/"
+          className="text-[2rem]"
+        >
+          moviesearch.
+        </Link>
         <p className="absolute bottom-[-0.5em] right-0 text-[0.85rem]">
           by jako
         </p>

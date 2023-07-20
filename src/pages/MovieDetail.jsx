@@ -30,12 +30,6 @@ function MovieDetail() {
     retrieveMovie(id);
   }, [id]);
 
-  useEffect(() => {
-    if (watchlist.length > 0) {
-      localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    }
-  }, [watchlist]);
-
   if (loading) {
     return <h1 className="pt-[100px] text-center text-white">Loading...</h1>;
   }

@@ -63,7 +63,7 @@ function Home() {
     <>
       <div>
         <SearchBar handleSubmit={handleSubmit} />
-        <div className="m-auto flex max-w-[1200px] flex-wrap items-start justify-center gap-5 pt-[5em] text-center text-white">
+        <div className="m-auto flex max-w-[1200px] flex-wrap items-start justify-center gap-5 pt-[5em] px-[2em] text-center text-white">
           {movieEl}
         </div>
       </div>

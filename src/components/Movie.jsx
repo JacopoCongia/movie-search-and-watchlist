@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import useWatchlist from "../../hooks/use-watchlist";
 
@@ -11,15 +10,9 @@ function Movie({ movie }) {
     return el.imdbID === movie.imdbID;
   });
 
-  useEffect(() => {
-    if (watchlist.length > 0) {
-      localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    }
-  }, [watchlist]);
-
   return (
     <Link
-      className={`relative mb-3 flex max-w-[80%] flex-col items-center rounded-xl bg-[#424242] p-[1.2em] drop-shadow-md hover:bg-[#575757] min-[500px]:max-w-[200px] ${
+      className={`relative mb-2 flex max-w-[80%] flex-col items-center rounded bg-[#424242] pb-[1em] drop-shadow-md hover:bg-[#575757] min-[500px]:max-w-[200px] ${
         inWatchlist ? "bg-green-900 hover:bg-green-800" : ""
       }`}
       to={movie.imdbID}
@@ -27,12 +20,12 @@ function Movie({ movie }) {
       {inWatchlist ? (
         <MdBookmarkRemove
           onClick={(e) => handleRemove(e, movie)}
-          className="absolute right-[11%] top-[6%] text-[1.7rem] hover:text-red-500"
+          className="absolute right-[3%] top-[2%] text-[2rem] hover:text-red-500"
         ></MdBookmarkRemove>
       ) : (
         <MdBookmarkAdd
           onClick={(e) => handleAdd(e, movie)}
-          className="absolute right-[11%] top-[6%] text-[1.7rem] drop-shadow hover:text-green-500"
+          className="absolute right-[3%] top-[2%] text-[2rem] drop-shadow hover:text-green-500"
         ></MdBookmarkAdd>
       )}
       {movie.Poster === "N/A" ? (
@@ -40,10 +33,13 @@ function Movie({ movie }) {
           No poster available
         </div>
       ) : (
-        <img src={movie.Poster} />
+        <img
+          className="w-[100%]"
+          src={movie.Poster}
+        />
       )}
-      <div>
-        <h1 className="mt-[0.5em] text-[1.3rem] min-[500px]:text-[0.95rem]">
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="mt-[0.5em] px-[1em] text-[1.3rem] min-[500px]:text-[0.95rem]">
           {movie.Title}
         </h1>
         <h2 className="text-[1rem] min-[500px]:text-[0.8rem]">
