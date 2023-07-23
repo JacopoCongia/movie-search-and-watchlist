@@ -1,29 +1,30 @@
 import useWatchlist from "../../hooks/use-watchlist";
+import Movie from "../components/Movie";
 
 function Watchlist() {
   const { watchlist } = useWatchlist();
 
   const watchlistEl = watchlist.map((movie) => {
     return (
-      <div
-        className="flex w-[200px] flex-col items-center"
+      <Movie
         key={movie.imdbID}
-      >
-        <img
-          className="w-[100%]"
-          src={movie.Poster}
-        />
-        <h1 className="mt-[0.5em] text-center text-[0.875rem] text-white">
-          {movie.Title}
-        </h1>
-      </div>
+        movie={movie}
+      />
     );
   });
 
   return (
-    <div className="flex flex-wrap justify-center gap-5 p-10">
-      {watchlistEl}
-    </div>
+    <>
+      {watchlist.length > 0 ? (
+        <div className="text-white text-center flex flex-wrap justify-center gap-5 p-10">
+          {watchlistEl}
+        </div>
+      ) : (
+        <h1 className="text-white text-center p-10">
+          Nothing here yet! Why don&#39;t you add some movies...
+        </h1>
+      )}
+    </>
   );
 }
 

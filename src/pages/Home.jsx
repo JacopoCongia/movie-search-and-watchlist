@@ -1,32 +1,9 @@
-import { useState, useEffect } from "react";
-import SearchBar from "../components/SearchBar";
+import { useEffect } from "react";
 import Movie from "../components/Movie";
-import { getMovies } from "../../api";
+import useSearch from "../../hooks/use-search";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState({});
-
-  function handleSubmit(e, text) {
-    e.preventDefault();
-    if (text) {
-      const title = text.replaceAll(" ", "+");
-      retrieveMovie(title);
-    }
-  }
-
-  async function retrieveMovie(title) {
-    try {
-      setLoading(true);
-      const data = await getMovies(title);
-      setMovies(data.Search);
-      // } catch (err) {
-      //   setError(err);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { movies, setMovies, loading, error } = useSearch();
 
   useEffect(() => {
     if (movies?.length > 0) {
@@ -44,6 +21,7 @@ function Home() {
       <Movie
         key={movie.imdbID}
         movie={movie}
+        searching
       >
         {movie.Title}
       </Movie>
@@ -53,17 +31,23 @@ function Home() {
   if (loading) {
     return (
       <>
-        <SearchBar handleSubmit={handleSubmit} />
         <h1 className="pt-[100px] text-center text-white">Loading...</h1>;
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <h1 className="pt-[100px] text-center text-white">{error}</h1>
       </>
     );
   }
 
   return (
     <>
-      <div>
-        <SearchBar handleSubmit={handleSubmit} />
-        <div className="m-auto flex max-w-[1200px] flex-wrap items-start justify-center gap-5 pt-[5em] px-[2em] text-center text-white">
+      <div className="flex flex-col">
+        <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 pt-[5em] px-[2em] text-center text-white">
           {movieEl}
         </div>
       </div>

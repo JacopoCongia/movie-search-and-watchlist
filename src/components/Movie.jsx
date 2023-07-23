@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import useWatchlist from "../../hooks/use-watchlist";
 
-function Movie({ movie }) {
+function Movie({ movie, searching }) {
   const { watchlist, handleAdd, handleRemove } = useWatchlist();
+  const location = useLocation();
 
   // Check if the movie is already in the watchlist
   const inWatchlist = watchlist?.some((el) => {
@@ -12,10 +13,11 @@ function Movie({ movie }) {
 
   return (
     <Link
-      className={`relative mb-2 flex max-w-[80%] flex-col items-center rounded bg-[#424242] pb-[1em] drop-shadow-md hover:bg-[#575757] min-[500px]:max-w-[200px] ${
-        inWatchlist ? "bg-green-900 hover:bg-green-800" : ""
+      className={`relative mb-2 flex max-w-[80%] flex-col justify-between items-center rounded bg-[#424242] pb-[1em] drop-shadow-md hover:bg-[#575757] min-[500px]:max-w-[200px] ${
+        inWatchlist && searching ? "bg-green-900 hover:bg-green-800" : ""
       }`}
-      to={movie.imdbID}
+      to={`/${movie.imdbID}`}
+      state={{ from: location.pathname }}
     >
       {inWatchlist ? (
         <MdBookmarkRemove
@@ -34,11 +36,11 @@ function Movie({ movie }) {
         </div>
       ) : (
         <img
-          className="w-[100%]"
+          className="object-cover w-[100%] min-[500px]:h-[300px] rounded-t"
           src={movie.Poster}
         />
       )}
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col mt-[.3em] items-center">
         <h1 className="mt-[0.5em] px-[1em] text-[1.3rem] min-[500px]:text-[0.95rem]">
           {movie.Title}
         </h1>
