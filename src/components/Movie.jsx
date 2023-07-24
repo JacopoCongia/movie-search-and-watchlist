@@ -31,7 +31,7 @@ function Movie({ movie, searching }) {
         ></MdBookmarkAdd>
       )}
       {movie.Poster === "N/A" ? (
-        <div className="flex h-[235px] w-[100%] items-center justify-center bg-[#616161]">
+        <div className="flex h-[235px] w-[200px] items-center justify-center bg-[#616161]">
           No poster available
         </div>
       ) : (

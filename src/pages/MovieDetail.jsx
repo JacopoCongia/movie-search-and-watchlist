@@ -31,7 +31,7 @@ function MovieDetail() {
 
   if (loading) {
     return (
-      <h1 className="pt-[100px] text-center text-white">
+      <h1 className="pt-[5em] m-auto text-3xl text-center text-white">
         Loading movie details...
       </h1>
     );

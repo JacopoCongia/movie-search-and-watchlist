@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { getMovies } from "../api";
+import { useSearchParams } from "react-router-dom";
 
 const SearchContext = createContext();
 
@@ -7,6 +8,8 @@ function SearchContextProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function handleSubmit(e, text) {
     e.preventDefault();
@@ -31,6 +34,7 @@ function SearchContextProvider({ children }) {
       console.log(err);
     } finally {
       setLoading(false);
+      setSearchParams(`search=${title}`);
     }
   }
 

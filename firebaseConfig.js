@@ -47,7 +47,7 @@ export async function addToDb(movie) {
 
 export async function removeFromDb(id) {
   // delete doc from the database given the movie's id
-  await deleteDoc(doc(db, "watchlist", id));
+  deleteDoc(doc(db, "watchlist", id));
 }
 
 // getWatchlist();

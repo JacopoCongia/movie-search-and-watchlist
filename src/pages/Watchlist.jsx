@@ -16,11 +16,11 @@ function Watchlist() {
   return (
     <>
       {watchlist.length > 0 ? (
-        <div className="text-white text-center flex flex-wrap justify-center gap-5 p-10">
+        <div className="max-w-[1200px] m-auto text-white text-center flex flex-wrap justify-center gap-5 p-10">
           {watchlistEl}
         </div>
       ) : (
-        <h1 className="text-white text-center p-10">
+        <h1 className="pt-[5em] m-auto text-3xl max-w-[10em] text-center text-white">
           Nothing here yet! Why don&#39;t you add some movies...
         </h1>
       )}
