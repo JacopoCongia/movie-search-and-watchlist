@@ -14,7 +14,7 @@ function Home() {
   useEffect(() => {
     const savedMovies = JSON.parse(sessionStorage.getItem("movies"));
     setMovies(savedMovies);
-  }, []);
+  }, [setMovies]);
 
   const movieEl = movies?.map((movie) => {
     return (
@@ -51,6 +51,7 @@ function Home() {
           {movieEl}
         </div>
       </div>
+      <button className="text-white">Placeholoder Load more movies</button>
     </>
   );
 }

@@ -10,8 +10,13 @@ function SearchBar() {
     setText(e.target.value);
   }
 
+  function handleSearchSubmit(e) {
+    handleSubmit(e, text);
+    setText("");
+  }
+
   return (
-    <form onSubmit={(e) => handleSubmit(e, text)}>
+    <form onSubmit={(e) => handleSearchSubmit(e)}>
       <input
         onChange={(e) => handleSearchChange(e)}
         type="search"
