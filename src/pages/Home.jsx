@@ -5,13 +5,25 @@ import { getMoreMovies } from "../../api";
 import { useSearchParams } from "react-router-dom";
 
 function Home() {
-  const { movies, setMovies, loading, setLoading, error, setError } =
-    useSearch();
+  const {
+    movies,
+    currentTitle,
+    setMovies,
+    loading,
+    setLoading,
+    error,
+    setError
+  } = useSearch();
   const [page, setPage] = useState(2);
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentSearch = searchParams.get("search");
+
+  useEffect(() => {
+    if (movies?.length) {
+      setSearchParams(`search=${currentTitle}`);
+    }
+  }, [movies?.length, currentTitle]);
 
   async function handleClick() {
     setPage((prevPage) => prevPage + 1);
@@ -20,7 +32,6 @@ function Home() {
     try {
       const nextPage = await getMoreMovies(currentSearch, page);
 
-      console.log(nextPage, page);
       if (nextPage.Response !== "False") {
         setMovies([...movies, ...nextPage.Search]);
       } else {
@@ -56,7 +67,17 @@ function Home() {
     );
   });
 
-  if (!movies.length) {
+  if (error) {
+    return (
+      <>
+        <h1 className="pt-[5em] px-[3em] m-auto text-3xl text-center text-white">
+          {error}
+        </h1>
+      </>
+    );
+  }
+
+  if (!movies?.length) {
     return (
       <>
         <h1 className="pt-[5em] px-[3em] m-auto text-3xl text-center text-white">
@@ -68,35 +89,25 @@ function Home() {
   }
 
   if (loading) {
-    if (movies.length) {
-      return (
-        <>
-          <div className="flex flex-col">
-            <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 pt-[5em] px-[2em] text-center text-white">
-              {movieEl}
-            </div>
-          </div>
-          {movies.length && (
-            <button
-              onClick={handleClick}
-              className="text-white py-8 mt-5 hover:bg-neutral-600 bg-neutral-700 w-[100%]"
-            >
-              {loading ? (
-                <div className="lds-dual-ring"></div>
-              ) : (
-                "Load More Movies"
-              )}
-            </button>
-          )}
-        </>
-      );
-    }
-  }
-
-  if (error) {
     return (
       <>
-        <h1 className="pt-[100px] text-center text-white">{error}</h1>
+        <div className="flex flex-col">
+          <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 pt-[5em] px-[2em] text-center text-white">
+            {movieEl}
+          </div>
+        </div>
+        {movies?.length && (
+          <button
+            onClick={handleClick}
+            className="text-white py-8 mt-5 hover:bg-neutral-600 bg-neutral-700 w-[100%]"
+          >
+            {loading ? (
+              <div className="lds-dual-ring"></div>
+            ) : (
+              "Load More Movies"
+            )}
+          </button>
+        )}
       </>
     );
   }
@@ -104,18 +115,22 @@ function Home() {
   return (
     <>
       <div className="flex flex-col">
-        <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 pt-[5em] px-[2em] text-center text-white">
+        <div className="m-auto justify-center flex max-w-[1200px] flex-wrap gap-5 pt-[5em] px-[2em] text-center text-white">
           {movieEl}
         </div>
+        {movies.length && (
+          <button
+            onClick={handleClick}
+            className="text-white py-[2em] mt-5 hover:bg-neutral-600 bg-neutral-700 w-[100%]"
+          >
+            {loading ? (
+              <div className="lds-dual-ring"></div>
+            ) : (
+              "Load More Movies"
+            )}
+          </button>
+        )}
       </div>
-      {movies.length && (
-        <button
-          onClick={handleClick}
-          className="text-white py-8 mt-5 hover:bg-neutral-600 bg-neutral-700 w-[100%]"
-        >
-          {loading ? <div className="lds-dual-ring"></div> : "Load More Movies"}
-        </button>
-      )}
     </>
   );
 }

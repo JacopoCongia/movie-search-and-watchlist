@@ -1,21 +1,20 @@
 import { createContext, useState } from "react";
 import { getMovies } from "../api";
-import { useSearchParams } from "react-router-dom";
 
 const SearchContext = createContext();
 
 function SearchContextProvider({ children }) {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState("");
 
   function handleSubmit(e, text) {
     e.preventDefault();
     if (text) {
       const title = text.replaceAll(" ", "+");
       retrieveMovie(title);
+      setCurrentTitle(title);
     }
   }
 
@@ -31,10 +30,8 @@ function SearchContextProvider({ children }) {
       }
     } catch (err) {
       setError(err.message);
-      console.log(err);
     } finally {
       setLoading(false);
-      setSearchParams(`search=${title}`);
     }
   }
 
@@ -43,6 +40,7 @@ function SearchContextProvider({ children }) {
       value={{
         movies,
         setMovies,
+        currentTitle,
         loading,
         setLoading,
         error,

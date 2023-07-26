@@ -13,7 +13,7 @@ function Movie({ movie, searching }) {
 
   return (
     <Link
-      className={`relative mb-2 flex max-w-[80%] flex-col justify-between items-center rounded bg-[#424242] pb-[1em] drop-shadow-md hover:bg-[#575757] min-[500px]:max-w-[200px] ${
+      className={`relative mb-2 flex w-[80%] flex-col justify-between items-center rounded bg-[#424242] pb-[1em] drop-shadow-md hover:bg-[#575757] min-[500px]:max-w-[200px] ${
         inWatchlist && searching ? "bg-green-900 hover:bg-green-800" : ""
       }`}
       to={`/${movie.imdbID}`}

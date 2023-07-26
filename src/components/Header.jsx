@@ -1,15 +1,15 @@
 import { PiFilmSlateLight } from "react-icons/pi";
-import { NavLink, Link } from "react-router-dom";
+import { BiUserCircle } from "react-icons/bi";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import { useLocation } from "react-router-dom";
 
 function Header() {
   const activeStyle = "font-bold border-b-[2px] border-white";
   const location = useLocation();
 
   return (
-    <header className=" relative  bg-[#F1B63F] px-[1.2em] py-[2.5em]">
-      <div className=" flex items-center justify-between">
+    <header className="relative  bg-[#ffa060] px-[1.2em] py-[2.5em]">
+      <div className=" flex items-center justify-between text-[#383838]">
         <div className="relative flex select-none items-center">
           <PiFilmSlateLight className="ml-3 text-[2.3rem]" />
           <Link
@@ -22,24 +22,27 @@ function Header() {
             by jako
           </p>
         </div>
-        <nav className={`flex flex-col items-end gap-3 min-[500px]:flex-row`}>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? activeStyle : "hover:font-bold"
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/watchlist"
-            className={({ isActive }) =>
-              isActive ? activeStyle : "hover:font-bold"
-            }
-          >
-            Watchlist
-          </NavLink>
-        </nav>
+        <div className="flex items-center gap-[2.5em]">
+          <nav className={`flex flex-col items-end gap-5 min-[500px]:flex-row`}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? activeStyle : "hover:font-bold"
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/watchlist"
+              className={({ isActive }) =>
+                isActive ? activeStyle : "hover:font-bold"
+              }
+            >
+              Watchlist
+            </NavLink>
+          </nav>
+          <BiUserCircle className="text-[2rem] hover:cursor-pointer hover:text-[#eeeeee]" />
+        </div>
       </div>
       {location.pathname === "/" && <SearchBar />}
     </header>

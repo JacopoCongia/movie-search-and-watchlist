@@ -4,6 +4,7 @@ export async function getMovies(title) {
   );
 
   const data = await response.json();
+
   return data;
 }
 

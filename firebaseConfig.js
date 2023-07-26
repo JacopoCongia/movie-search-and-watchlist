@@ -41,7 +41,8 @@ export async function addToDb(movie) {
 
   await setDoc(doc(db, "watchlist", docRef.id), {
     ...movie,
-    id: docRef.id
+    id: docRef.id,
+    dateAdded: Date.now()
   });
 }
 
