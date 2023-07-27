@@ -22,7 +22,7 @@ function Header() {
             by jako
           </p>
         </div>
-        <div className="flex items-center gap-[2.5em]">
+        <div className="flex items-center gap-5">
           <nav className={`flex flex-col items-end gap-5 min-[500px]:flex-row`}>
             <NavLink
               to="/"
