@@ -41,7 +41,9 @@ function Header() {
               Watchlist
             </NavLink>
           </nav>
-          <BiUserCircle className="text-[2rem] hover:cursor-pointer hover:text-[#eeeeee]" />
+          <Link to="/account">
+            <BiUserCircle className="text-[2rem] hover:cursor-pointer hover:text-[#eeeeee]" />
+          </Link>
         </div>
       </div>
       {location.pathname === "/" && <SearchBar />}

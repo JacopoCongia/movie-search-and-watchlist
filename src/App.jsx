@@ -8,6 +8,8 @@ import Layout from "./components/Layout";
 import Watchlist from "./pages/Watchlist";
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
+import Account from "./pages/Account";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,8 +26,16 @@ const router = createBrowserRouter(
         element={<MovieDetail />}
       />
       <Route
-        path="watchlist"
+        path="/watchlist"
         element={<Watchlist />}
+      />
+      <Route
+        path="/account"
+        element={<Account />}
+      />
+      <Route
+        path="/register"
+        element={<Register />}
       />
     </Route>
   )

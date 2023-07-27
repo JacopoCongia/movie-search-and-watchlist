@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import { getMovie } from "../../api";
 import useWatchlist from "../../hooks/use-watchlist";
+import useAuth from "../../hooks/use-auth";
 
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   const { watchlist, handleAdd, handleRemove } = useWatchlist();
+  const { currentUser } = useAuth();
 
   const location = useLocation();
 
@@ -61,8 +63,13 @@ function MovieDetail() {
             </p>
             {!inWatchlist ? (
               <button
+                disabled={!currentUser}
                 onClick={(e) => handleAdd(e, movie)}
                 className={`${
+                  !currentUser
+                    ? "bg-neutral-700 opacity-50 cursor-not-allowed hover:bg-neutral-700"
+                    : ""
+                } ${
                   inWatchlist ? "bg-green-700" : ""
                 } rounded-[2em] min-[1085px]:ml-auto border px-[1.5em] whitespace-nowrap py-[0.2em] text-[0.875rem] hover:bg-green-700`}
               >
@@ -70,8 +77,9 @@ function MovieDetail() {
               </button>
             ) : (
               <button
+                disabled={!currentUser}
                 onClick={(e) => handleRemove(e, movie)}
-                className="bg-green-700 min-[1085px]:ml-auto rounded-[2em] border px-[1.5em] py-[0.2em] text-[0.875rem] group hover:after:content-['Remove'] hover:bg-red-700"
+                className={`bg-green-700 min-[1085px]:ml-auto rounded-[2em] border px-[1.5em] py-[0.2em] text-[0.875rem] group hover:after:content-['Remove'] hover:bg-red-700`}
               >
                 <span className="group-hover:hidden whitespace-nowrap">
                   In Watchlist

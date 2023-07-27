@@ -1,10 +1,12 @@
-import { createContext, useState } from "react";
-import { getWatchlist, addToDb, removeFromDb } from "../firebaseConfig";
+import { createContext, useState, useEffect } from "react";
+import { getWatchlist, addToDb, removeFromDb } from "../firebase";
+import useAuth from "../hooks/use-auth";
 
 const WatchlistContext = createContext();
 
 function WatchlistContextProvider({ children }) {
   const [watchlist, setWatchlist] = useState([]);
+  const { currentUser } = useAuth();
 
   async function handleAdd(e, movie) {
     e.preventDefault();
@@ -18,8 +20,9 @@ function WatchlistContextProvider({ children }) {
       setWatchlist((prevWatchlist) => {
         return [...prevWatchlist, movie];
       });
-      addToDb(movie);
+      addToDb(movie, currentUser);
     }
+    getSavedWatchlist();
   }
 
   function handleRemove(e, movie) {
@@ -36,17 +39,22 @@ function WatchlistContextProvider({ children }) {
         return item.imdbID !== movie.imdbID;
       })
     );
-    removeFromDb(movieId);
+    removeFromDb(movieId, currentUser);
   }
 
   async function getSavedWatchlist() {
-    const savedWatchlist = await getWatchlist();
-    const sortedWatchlist = savedWatchlist.sort((a, b) => {
-      return b.dateAdded - a.dateAdded;
-    });
-
-    setWatchlist(sortedWatchlist);
+    if (currentUser) {
+      const savedWatchlist = await getWatchlist(currentUser);
+      const sortedWatchlist = savedWatchlist.sort((a, b) => {
+        return b.dateAdded - a.dateAdded;
+      });
+      setWatchlist(sortedWatchlist);
+    }
   }
+
+  useEffect(() => {
+    getSavedWatchlist();
+  }, [currentUser]);
 
   return (
     <WatchlistContext.Provider

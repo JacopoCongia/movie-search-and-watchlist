@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import useWatchlist from "../../hooks/use-watchlist";
+import useAuth from "../../hooks/use-auth";
+import Bookmark from "./Bookmark";
 
 function Movie({ movie, searching }) {
   const { watchlist, handleAdd, handleRemove } = useWatchlist();
+  const { currentUser } = useAuth();
   const location = useLocation();
 
   // Check if the movie is already in the watchlist
@@ -19,16 +21,13 @@ function Movie({ movie, searching }) {
       to={`/${movie.imdbID}`}
       state={{ from: location.pathname }}
     >
-      {inWatchlist ? (
-        <MdBookmarkRemove
-          onClick={(e) => handleRemove(e, movie)}
-          className="absolute right-[3%] top-[2%] text-[2rem] hover:text-red-500"
-        ></MdBookmarkRemove>
-      ) : (
-        <MdBookmarkAdd
-          onClick={(e) => handleAdd(e, movie)}
-          className="absolute right-[3%] top-[2%] text-[2rem] drop-shadow hover:text-green-500"
-        ></MdBookmarkAdd>
+      {currentUser && (
+        <Bookmark
+          movie={movie}
+          handleAdd={handleAdd}
+          handleRemove={handleRemove}
+          inWatchlist={inWatchlist}
+        />
       )}
       {movie.Poster === "N/A" ? (
         <div className="flex h-[235px] w-[200px] items-center justify-center bg-[#616161]">
