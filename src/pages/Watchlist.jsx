@@ -19,7 +19,7 @@ function Watchlist() {
   return (
     <>
       {!currentUser ? (
-        <div className="mt-[5em] px-[2em] text-3xl text-white flex flex-col items-center">
+        <div className="mt-[5em] px-[2em] text-center text-3xl text-white flex flex-col items-center">
           <div>
             <Link
               to="/account"
@@ -32,7 +32,7 @@ function Watchlist() {
           <div className="mt-3  text-[1.5rem]">
             <Link to="/register">
               Or
-              <span className="text-[#ffa060] hover:font-bold hover:underline ml-2">
+              <span className="text-[#ffa060] text-center hover:font-bold hover:underline ml-2">
                 sign up here!
               </span>
             </Link>
