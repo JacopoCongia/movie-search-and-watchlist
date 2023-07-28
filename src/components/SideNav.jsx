@@ -14,7 +14,7 @@ function SideNav({ isVisible, setIsVisible }) {
       <Link
         to="/account"
         onClick={() => setIsVisible(false)}
-        className="flex items-center justify-between hover:cursor-pointer text-[#eeeeee]"
+        className="flex items-center justify-between hover:cursor-pointer text-[#eeeeee] hover:font-bold"
       >
         Account
         <BiUserCircle className="text-[2rem] hover:cursor-pointer hover:text-[#eeeeee]" />

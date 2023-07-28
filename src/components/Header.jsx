@@ -2,9 +2,9 @@ import { PiFilmSlateLight } from "react-icons/pi";
 import { BiUserCircle } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import SearchBar from "./SearchBar";
 import SideNav from "./SideNav";
-import { useState } from "react";
 
 function Header() {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,7 +52,7 @@ function Header() {
           </nav>
           <GiHamburgerMenu
             onClick={() => setIsVisible((prevIsVisible) => !prevIsVisible)}
-            className="text-[1.5rem] min-[550px]:hidden"
+            className="text-[1.5rem] min-[550px]:hidden hover:text-[#eeeeee] hover:cursor-pointer"
           />
         </div>
       </div>
