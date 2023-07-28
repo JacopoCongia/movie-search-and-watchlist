@@ -39,6 +39,7 @@ function SignIn() {
           className="px-4 py-2 text-center rounded"
           type="email"
           name="email"
+          autoComplete="email"
           value={formData.email}
           onChange={handleFormChange}
           placeholder="john@doe.com"
@@ -58,7 +59,9 @@ function SignIn() {
           Sign In
         </button>
         {error ? (
-          <h1 className="text-red-500 text-center mt-3">{error?.message}</h1>
+          <h1 className="text-red-500 text-center mt-3">
+            Error: {error?.code.replace("auth/", "")}
+          </h1>
         ) : (
           ""
         )}

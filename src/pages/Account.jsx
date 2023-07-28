@@ -5,11 +5,18 @@ import useWatchlist from "../../hooks/use-watchlist";
 
 function Account() {
   const { setWatchlist } = useWatchlist();
-  const { currentUser, logOut } = useAuth();
+  const { currentUser, logOut, deleteAccount } = useAuth();
 
   function handleLogOut() {
     logOut();
     setWatchlist([]);
+  }
+
+  function handleDeleteAccount(e) {
+    if (confirm("Are you sure?")) {
+      e.preventDefault();
+      deleteAccount();
+    }
   }
 
   return (
@@ -23,6 +30,12 @@ function Account() {
               className="text-white border px-5 py-1 rounded bg-red-700 hover:bg-red-500"
             >
               Log Out
+            </button>
+            <button
+              onClick={handleDeleteAccount}
+              className="mt-5 text-white border px-5 py-1 rounded bg-red-700 hover:bg-red-500"
+            >
+              Delete Account
             </button>
           </>
         ) : (

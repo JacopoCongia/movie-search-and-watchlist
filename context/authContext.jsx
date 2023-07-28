@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  deleteUser
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -31,29 +32,47 @@ function AuthContextProvider({ children }) {
   }
 
   function logIn(userData) {
-    signInWithEmailAndPassword(auth, userData.email, userData.password)
-      .then((credential) => {
-        //
-      })
-      .catch((error) => setError(error));
+    signInWithEmailAndPassword(auth, userData.email, userData.password).catch(
+      (error) => {
+        setError(error);
+      }
+    );
   }
 
   function logOut() {
     signOut(auth)
       .then(() => {
-        // console.log("Log out successful");
+        console.log("Log out successful");
       })
       .catch((error) => {
-        // console.log(error);
+        setError(error);
       })
       .finally(() => {
         setError(null);
       });
   }
 
+  function deleteAccount() {
+    const user = auth.currentUser;
+    deleteUser(user)
+      .then(() => {
+        console.log("Account deleted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <AuthContext.Provider
-      value={{ createAccount, logIn, logOut, currentUser, error }}
+      value={{
+        createAccount,
+        logIn,
+        logOut,
+        deleteAccount,
+        currentUser,
+        error
+      }}
     >
       {children}
     </AuthContext.Provider>

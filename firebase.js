@@ -65,5 +65,3 @@ export async function addUserToDb(user) {
     email: user.email
   });
 }
-
-// getWatchlist();
