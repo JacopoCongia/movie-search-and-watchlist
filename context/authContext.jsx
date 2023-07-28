@@ -16,7 +16,6 @@ function AuthContextProvider({ children }) {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // const uid = user.uid;
       setCurrentUser(user);
     } else {
       setCurrentUser(null);

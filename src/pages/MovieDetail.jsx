@@ -55,10 +55,10 @@ function MovieDetail() {
         />
         <div>
           <div className="mb-[2em] flex flex-col items-center justify-center min-[1085px]:justify-start min-[1085px]:flex-row min-[1085px]:gap-3 min-[1085px]:items-baseline">
-            <h1 className="text-[1.2rem] min-[675px]:text-[2rem] font-bold min-[675px]:text-left">
+            <h1 className="text-[1.5rem] min-[675px]:text-[2rem] font-bold min-[675px]:text-left">
               {movie.Title}
             </h1>
-            <p className="text-[1rem] mt-[-0.3em] min-[675px]:text-[1.5rem] mb-[1em] min-[1085px]:m-0">
+            <p className="text-[1.1rem] mt-[-0.3em] min-[675px]:text-[1.5rem] mb-[1em] min-[1085px]:m-0">
               ({movie.Year})
             </p>
             {!inWatchlist ? (

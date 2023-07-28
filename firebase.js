@@ -61,6 +61,7 @@ export function removeFromDb(id, currentUser) {
 }
 
 export async function addUserToDb(user) {
+  // adds the user to the db when they sign up for a new account with the uid as the document id
   await setDoc(doc(db, "users", user.uid), {
     email: user.email
   });
