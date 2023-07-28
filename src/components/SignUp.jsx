@@ -54,7 +54,9 @@ function SignUp() {
           Sign Up
         </button>
         {error ? (
-          <h1 className="text-red-500 text-center mt-3">{error.message}</h1>
+          <h1 className="text-red-500 text-center mt-3">
+            Error: {error?.code.replace("auth/", "")}
+          </h1>
         ) : (
           ""
         )}
