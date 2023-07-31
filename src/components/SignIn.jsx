@@ -56,7 +56,7 @@ function SignIn() {
           type="submit"
           className="text-white border rounded px-4 py-2 w-full hover:bg-neutral-700"
         >
-          Sign In
+          Log In
         </button>
         {error ? (
           <h1 className="text-red-500 text-center mt-3">

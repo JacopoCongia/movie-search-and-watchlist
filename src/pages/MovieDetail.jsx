@@ -65,14 +65,12 @@ function MovieDetail() {
               <button
                 disabled={!currentUser}
                 onClick={(e) => handleAdd(e, movie)}
-                className={`${
-                  !currentUser
-                    ? "bg-neutral-700 opacity-50 cursor-not-allowed hover:bg-neutral-700"
-                    : ""
-                } ${
-                  inWatchlist ? "bg-green-700" : ""
-                } rounded-[2em] min-[1085px]:ml-auto border px-[1.5em] whitespace-nowrap py-[0.2em] text-[0.875rem] hover:bg-green-700`}
+                className={`disabled:bg-neutral-800 disabled:cursor-not-allowed group disabled:relative disabled:text-[#949494] disabled:border-[#949494]
+                 rounded-[2em] min-[1085px]:ml-auto border px-[1.5em] whitespace-nowrap py-[0.2em] text-[0.875rem] hover:bg-green-700`}
               >
+                <div className="hidden opacity-100 absolute left-[-50%] translate-y-[-130%] px-4 py-2 bg-neutral-700 text-white group-hover:block rounded">
+                  Log in to add the movie to your watchlist
+                </div>
                 Add to watchlist
               </button>
             ) : (
