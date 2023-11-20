@@ -70,7 +70,8 @@ function AuthContextProvider({ children }) {
         logOut,
         deleteAccount,
         currentUser,
-        error
+        error,
+        setError
       }}
     >
       {children}

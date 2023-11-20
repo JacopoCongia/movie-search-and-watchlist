@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../hooks/use-auth";
 import { Navigate } from "react-router-dom";
 
 function SignUp() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { createAccount, error, currentUser } = useAuth();
+  const { createAccount, error, setError, currentUser } = useAuth();
 
   function handleFormChange(e) {
     const { value, name } = e.target;
@@ -23,6 +23,10 @@ function SignUp() {
       createAccount(formData);
     }
   }
+
+  useEffect(() => {
+    setError(null);
+  }, []);
 
   return (
     <div className="flex flex-col gap-3 mt-[3em] m-auto w-[66%] min-[1500px]:w-[33%]">
