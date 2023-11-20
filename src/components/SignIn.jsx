@@ -3,7 +3,7 @@ import useAuth from "../../hooks/use-auth";
 
 function SignIn() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { logIn, error } = useAuth();
+  const { logIn, logInWithGoogle, error } = useAuth();
 
   function handleFormChange(e) {
     const { value, name } = e.target;
@@ -24,13 +24,18 @@ function SignIn() {
     }
   }
 
-  // if (error) {
-  //   return <h1 className="text-white">{error.message}</h1>;
-  // }
-
   return (
     <div className="flex flex-col gap-3 w-[66%] min-[1500px]:w-[33%]">
       <h1 className="text-white m-auto text-[1.5rem]">Sign In</h1>
+      <button
+        className="text-center rounded relative hover:opacity-90 w-[100%] text-white bg-[#4285F4] flex items-center justify-between"
+        onClick={() => logInWithGoogle()}
+      >
+        <img src="/google-sign-in.svg" />
+        <p className="font-medium absolute left-[50%] w-[200px] ml-[-100px]">
+          Sign in With Google
+        </p>
+      </button>
       <form
         onSubmit={handleFormSubmit}
         className="flex flex-col gap-2"
